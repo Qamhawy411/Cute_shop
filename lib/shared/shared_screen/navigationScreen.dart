@@ -1,10 +1,12 @@
 import 'package:cute_shop/user/orders_coming.dart';
+import 'package:cute_shop/user/shopppingCart.dart';
 import 'package:cute_shop/user/user_account.dart';
 import 'package:flutter/material.dart';
-import 'package:cute_shop/shared/shared_widget/shoopingCartIcon.dart';
+
 import 'package:cute_shop/shared/shared_screen/homepage.dart';
-import 'package:cute_shop/products/product_views/search_results.dart';
-import 'package:cute_shop/shared/shared_screen/homepage.dart';
+
+
+
 class navigationScreen extends StatefulWidget {
   const navigationScreen({super.key});
 
@@ -13,7 +15,7 @@ class navigationScreen extends StatefulWidget {
 }
 
 class _navigationScreenState extends State<navigationScreen> {
-  int selectedScreen=0;
+  int selectedScreen=1;
   List Screen =[comingOrders(),HomeBage(),userDetails(),];
   @override
   Widget build(BuildContext context) {
@@ -28,8 +30,14 @@ class _navigationScreenState extends State<navigationScreen> {
         elevation: 10,
         actions: [
          
-          barContainer(Icons.notifications_none, Colors.black),
-           barContainer(Icons.shopping_cart_outlined, Colors.black),
+         containerButton(IconButton(onPressed: (){},icon: Icon(Icons.notifications,color: Colors.red,),)),
+          containerButton(IconButton(icon: Icon(Icons.shopping_cart_outlined,color: Colors.red),
+          onPressed: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (conntext){
+                return shoppingCart();
+              }));
+
+            },))
         ],
       ) ,
     
@@ -66,3 +74,17 @@ BottomNavigationBarItem bottomIcon(String title ,IconData icon, ){
   return  BottomNavigationBarItem(icon:(Icon(icon))  ,
             label: title, );
 } 
+
+ Container containerButton(Widget widget){
+  return Container(
+            decoration: BoxDecoration(
+               color: Colors.grey[200],
+               borderRadius: BorderRadius.circular(7)
+               
+            ),
+            margin: EdgeInsets.only(left: 3),
+           
+            width: 40,
+            child:  widget
+          );
+ }

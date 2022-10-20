@@ -1,11 +1,10 @@
 
-import 'dart:ui';
 import 'package:cute_shop/products/product_views/search_results.dart';
-import 'package:cute_shop/shared/shared_them/sharedColors.dart';
+import 'package:cute_shop/shared/shared_widget/categoryList.dart';
 import 'package:cute_shop/shared/shared_widget/productwidget.dart';
+import 'package:cute_shop/shared/shared_widget/textformfield.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 
 
 
@@ -17,20 +16,8 @@ class HomeBage extends StatefulWidget {
 }
 
 class _HomeBageState extends State<HomeBage> {
-  bool isselected= true;
- final List  <Map<String,dynamic>> containerSize=[
-   { "title":"All",
-    "size": 90.0},
-    { "title":"Electronic and Appliances",
-    "size": 270.0},
-    { "title":"shirts",
-    "size": 150.0},
-    { "title":"carpets",
-    "size": 150.0},
-     { "title":"pantalon",
-    "size": 160.0},
-
-  ];
+  TextEditingController searchcontroller = TextEditingController();
+ 
   @override
   Widget build(BuildContext context) {
 
@@ -51,7 +38,29 @@ class _HomeBageState extends State<HomeBage> {
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(30)
                  ),
-                // child: TextFormField()
+                 child: Padding(padding: EdgeInsets.symmetric(horizontal:5 ),
+                  child: TextField(
+                    decoration: InputDecoration(
+                border: textfield(Colors.pink),
+                errorBorder: textfield(Colors.red),
+                enabledBorder: textfield(Colors.pink),
+                focusedBorder: textfield(Colors.green),
+                disabledBorder: textfield(Colors.grey),
+                focusedErrorBorder: textfield(Colors.red),
+                prefixIcon: Icon(Icons.search),
+                 hintStyle: TextStyle(color: Colors.grey,fontSize: 25,wordSpacing: 2,),
+                 labelText: "search" 
+                     
+                    ),
+                    keyboardType: TextInputType.text,
+                    controller:searchcontroller ,
+                    enableSuggestions: true,
+                    
+                    textAlign: TextAlign.start,
+                    textInputAction: TextInputAction.search,
+                  ),
+                 
+                 )
               ),
               Container(
             decoration: BoxDecoration(
@@ -72,41 +81,7 @@ class _HomeBageState extends State<HomeBage> {
            
            rowSection("Popular Categories","See All"),
            
-                      Container(
-                        height: 70,
-                        decoration: BoxDecoration(
-                          color: Colors.white
-                    
-                        ),
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 5,
-                          itemBuilder: (context,i){
-                            return InkWell(
-                              child: Container(
-                            
-       margin: EdgeInsets.all(10),
-       alignment:Alignment.center ,
-       child: Text(containerSize[i]["title"],style: TextStyle(color: Colors.red,fontSize: 20,fontWeight: FontWeight.bold),),
-        width: containerSize[i]["size"],
-           height: 50,
-           decoration: BoxDecoration(
-           borderRadius: BorderRadius.circular(25),
-             color: isselected?Colors.orange:Colors.grey[200]
-              ),
-               ),
-                                    onTap: (() {
-                                      setState(() {
-                                        isselected=!isselected;
-                                      });
-                                      Navigator.of(context).push(MaterialPageRoute(builder: (Context) {
-                                        return searchresult(containerSize[i]["title"]);
-                                      }));
-                                    }),
-                            );
-                          },
-                        )
-                      )   ,
+                    categoryList()   ,
               productWidget(),          
            
         ],
@@ -134,7 +109,7 @@ class _HomeBageState extends State<HomeBage> {
     }
 
 
-    Container barContainer(IconData icon, Color color ){
+    Container barContainer(IconData icon, Color color,w ){
   return Container(
             decoration: BoxDecoration(
                color: Colors.grey[200],
@@ -144,6 +119,6 @@ class _HomeBageState extends State<HomeBage> {
             margin: EdgeInsets.only(left: 3),
            
             width: 40,
-            child:  Icon(icon,color: color,size: 30,),
+            child:  IconButton(onPressed: (){},icon: Icon(icon),)
           );
 }
