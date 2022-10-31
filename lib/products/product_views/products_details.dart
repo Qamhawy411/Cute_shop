@@ -12,12 +12,15 @@ class productDetails extends StatefulWidget {
 class _productDetailsState extends State<productDetails> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return DefaultTabController(length: 4,
+     child:Scaffold(
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: Icon(Icons.west_outlined,color: Colors.black,size: 30,),
+        leading: IconButton(onPressed: (){
+          Navigator.of(context).pop();
+        }, icon: Icon(Icons.west_outlined,color: Colors.black,)),
         actions: [
           Icon(Icons.favorite_border,color: Colors.red,size: 30,)
         ],
@@ -90,34 +93,48 @@ class _productDetailsState extends State<productDetails> {
            ) ,
            trailing: Text("\$1700",style: TextStyle(color: Colors.red,fontSize: 20)),
           ),
+          Container(
+           
+            child: TabBar(labelStyle: TextStyle(color: Colors.pink,
+            fontSize: 17,
+            fontWeight: FontWeight.bold,),
+           
+            labelColor: Colors.pink,
+            indicatorColor: Colors.pink,
+           
+            unselectedLabelColor:Colors.black ,
+            
+            isScrollable: true,tabs: [
+              Tab(text: "Description",),
+              Tab(text:"Reveiews" ,),
+               Tab(text:"Offers" ,),
+              Tab(text: "Policy",),
+            
+
+            ]),
+          ),
+          Container(
+            height: 300,
+            color: Colors.white,
+            child: Padding(padding: EdgeInsets.all(10),
+            child:TabBarView(children: [
+               ListTile(title: Text("qamhawy1"),),
+               ListTile(title: Text("qamhawy2"),),
+               ListTile(title: Text("qamhawy3"),),
+               ListTile(title: Text("qamhawy4"),),
+            ]), )
+          )
           
         ],
       ) ,
+          
 
      
-    );
+    ));
 
   }
-}
+} 
 
 
 
 
-Container containerOfFloat2(String title,IconData icon,IconData icon2){
-  return Container(
-        decoration: BoxDecoration(
-          color: Colors.pink,
-          borderRadius: BorderRadius.circular(20)
-        ),
-        height: 50,
-        width: 150,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-             Icon(icon2,color: Colors.white,),
-            Text(title,style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.normal),),
-            Icon(icon,color: Colors.white,)
-          ],
-        ),
-      );
-}

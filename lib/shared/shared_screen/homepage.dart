@@ -1,9 +1,12 @@
 
 import 'package:cute_shop/products/product_views/search_results.dart';
 import 'package:cute_shop/shared/shared_widget/categoryList.dart';
+import 'package:cute_shop/shared/shared_widget/drawer.dart';
 import 'package:cute_shop/shared/shared_widget/productwidget.dart';
 import 'package:cute_shop/shared/shared_widget/textformfield.dart';
 import 'package:flutter/material.dart';
+import 'package:cute_shop/shared/shared_screen/navigationScreen.dart';
+import 'package:cute_shop/user/shopppingCart.dart';
 
 
 
@@ -23,6 +26,22 @@ class _HomeBageState extends State<HomeBage> {
 
 
     return Scaffold(
+       drawer:drawer(),
+      appBar:AppBar(
+        backgroundColor: Colors.grey[200],
+        elevation: 10,
+        actions: [
+         
+         containerButton(IconButton(onPressed: (){},icon: Icon(Icons.notifications,color: Colors.red,),)),
+          containerButton(IconButton(icon: Icon(Icons.shopping_cart_outlined,color: Colors.red),
+          onPressed: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (conntext){
+                return shoppingCart();
+              }));
+
+            },))
+        ],
+      ) ,
       
       
      
@@ -38,29 +57,7 @@ class _HomeBageState extends State<HomeBage> {
                   color: Colors.grey[200],
                   borderRadius: BorderRadius.circular(30)
                  ),
-                 child: Padding(padding: EdgeInsets.symmetric(horizontal:5 ),
-                  child: TextField(
-                    decoration: InputDecoration(
-                border: textfield(Colors.pink),
-                errorBorder: textfield(Colors.red),
-                enabledBorder: textfield(Colors.pink),
-                focusedBorder: textfield(Colors.green),
-                disabledBorder: textfield(Colors.grey),
-                focusedErrorBorder: textfield(Colors.red),
-                prefixIcon: Icon(Icons.search),
-                 hintStyle: TextStyle(color: Colors.grey,fontSize: 25,wordSpacing: 2,),
-                 labelText: "search" 
-                     
-                    ),
-                    keyboardType: TextInputType.text,
-                    controller:searchcontroller ,
-                    enableSuggestions: true,
-                    
-                    textAlign: TextAlign.start,
-                    textInputAction: TextInputAction.search,
-                  ),
-                 
-                 )
+                 child: readyField(Fields(labelText: "search",controler: searchcontroller,icon: Icons.search,))
               ),
               Container(
             decoration: BoxDecoration(

@@ -20,26 +20,7 @@ class _navigationScreenState extends State<navigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-         
-        elevation: 10,
-        backgroundColor: Colors.pink[200],
-      ),
-      appBar:AppBar(
-        backgroundColor: Colors.grey[200],
-        elevation: 10,
-        actions: [
-         
-         containerButton(IconButton(onPressed: (){},icon: Icon(Icons.notifications,color: Colors.red,),)),
-          containerButton(IconButton(icon: Icon(Icons.shopping_cart_outlined,color: Colors.red),
-          onPressed: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (conntext){
-                return shoppingCart();
-              }));
-
-            },))
-        ],
-      ) ,
+     
     
         bottomNavigationBar: BottomNavigationBar(
            backgroundColor: Colors.red[300],
